@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./static/styles/main.css">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <header class="nav-bar">
+        <div class="nav-content">
+            <a href="/">
+                <div class="nav-logo">
+                    <img src="./static/img/logo.svg" />
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <section class="hobbies">
+        <h1>{{ title }}</h1>
+        {% for hobby in hobbies %}
+        <div class="card">
+            <h3>{{ hobby.name }}</h3>
+            <p>{{ hobby.description }}</p>
+        </div>
+        {% endfor %}
+    </section>
+</body>
+</html>
