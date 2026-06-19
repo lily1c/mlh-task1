@@ -1,97 +1,200 @@
-p, h1, h2, h3, h4, h5, h6, button {
-    font-family: "Roboto", serif;
+/* ============================================================
+   Assol Abasova — Portfolio
+   Direction: precise, engineered, confident. A fixed control
+   rail (sidebar) on the left like a systems dashboard; content
+   reads as a clean technical record on the right.
+   ============================================================ */
+
+:root {
+  --ink:        #0d1b2a;   /* near-black navy, body text */
+  --navy:       #1d539f;   /* brand blue, from the logo */
+  --navy-deep:  #16335c;   /* darker brand, headings */
+  --rail:       #0f2747;   /* sidebar background */
+  --paper:      #f4f6fa;   /* page background */
+  --card:       #ffffff;   /* card surface */
+  --line:       #e2e8f2;   /* hairline borders */
+  --muted:      #6b7a90;   /* secondary text */
+  --accent:     #ff6b3d;   /* warm signal accent, used sparingly */
 }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-    background-color: #f5f5f9;
-    background-size: cover;
-    width: auto; 
-    overflow-x: hidden;
-    font-family: "Roboto", serif;
-    margin: 0px;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Roboto", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.nav-bar {
-    width: 100%;
-    display: inline-block;
-    background-color: #1C539F;
-    font-family: "Roboto", serif;
-    font-weight: 700 !important;
-    padding-top: 10px;
+/* ---------- Layout: fixed rail + content ---------- */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 240px;
+  background: var(--rail);
+  color: #dce5f2;
+  padding: 32px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.nav-content .logo-touch-target {
-    display: inline-flex;
-    height: 60%;
-    width: 350px;
+.sidebar-logo img { max-width: 130px; height: auto; display: block; }
+
+.sidebar-menu { display: flex; flex-direction: column; gap: 4px; }
+
+.sidebar-menu .menu-button {
+  text-decoration: none;
+  color: #aebfd8;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 2px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.sidebar-menu .menu-button:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border-left-color: var(--accent);
 }
 
-.nav-content .nav-logo {
-    height: 60px;
-    margin: auto;
+.sidebar-tag {
+  margin-top: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7d90ad;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.nav-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* content offset by the rail */
+.content { margin-left: 240px; }
 
-.nav-logo img {
-    width: 200px;
-}
-
-.nav-content nav {
-    display: block;
-    width: 100%;
-    text-align: right;
-    padding-top: 0px;
-    padding-right: 0px;
-}
-
+/* ---------- Hero / profile ---------- */
 .profile {
-    background-color: #1d539f !important;
-    text-align: center;
-    height: 320px;
-    margin-bottom: 50px;
+  background:
+    radial-gradient(1200px 400px at 20% -10%, #2a6bc4 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #fff;
+  text-align: center;
+  padding: 70px 40px 64px;
+  position: relative;
+  overflow: hidden;
 }
-
+.profile::after {
+  /* faint engineering grid, the "signature" texture */
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.profile-picture { position: relative; z-index: 1; margin-bottom: 18px; }
+.profile-picture img {
+  width: 150px; height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.85);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.28);
+}
 .profile h1 {
-        font-size: 50px;
-        font-weight: 700;
-        color: white;
+  position: relative; z-index: 1;
+  margin: 0;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.profile .role {
+  position: relative; z-index: 1;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #cfe0f7;
+  letter-spacing: 0.04em;
 }
 
-.profile img {
-        border-radius: 50%;
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;        
-        padding: 20px;
-}
+/* ---------- Sections ---------- */
+section { padding: 48px 56px; max-width: 980px; }
+section + section { padding-top: 8px; }
 
-.profile .profile-picture {
-    margin-bottom: 30px;
-    height: 200px;
+.section-head {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 22px;
 }
-
-.banner {
-    padding: 20px 0px 50px 0px;
-    height: 150px;
-    background-color: #1d539f;
+.section-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--navy);
 }
+.section-head .rule { flex: 1; height: 1px; background: var(--line); }
 
-.banner .logo {
-    max-width:180px;
-    max-height:60px;
-    width: auto;
-    height: auto;
+.about p { font-size: 18px; line-height: 1.7; color: #2c3a4f; max-width: 760px; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 14px 0;
+  transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
 }
+.card:hover {
+  box-shadow: 0 10px 28px rgba(22,51,92,0.10);
+  transform: translateY(-2px);
+  border-color: #cdd9ec;
+}
+.card h3 { margin: 0 0 4px; font-size: 18px; color: var(--navy-deep); font-weight: 700; }
+.card .dates {
+  margin: 0 0 10px; font-size: 13px; color: var(--muted);
+  font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+}
+.card p { margin: 0; color: #3a485c; }
 
-.banner .title {
-    color: white;
-    font-size: 50px;
-    font-weight: 700;
+/* ---------- Hobbies grid ---------- */
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+.hobby-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.hobby-card:hover { box-shadow: 0 10px 28px rgba(22,51,92,0.12); transform: translateY(-3px); }
+.hobby-card .hobby-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+.hobby-card .hobby-body { padding: 14px 16px; }
+.hobby-card h3 { margin: 0 0 4px; font-size: 16px; color: var(--navy-deep); }
+.hobby-card p { margin: 0; font-size: 14px; color: #51607a; }
+
+/* ---------- Footer ---------- */
+.foot { padding: 28px 56px 60px; color: var(--muted); font-size: 13px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .sidebar {
+    position: static; width: auto; flex-direction: row;
+    align-items: center; justify-content: space-between;
+    padding: 16px 20px; gap: 12px;
+  }
+  .sidebar-menu { flex-direction: row; }
+  .sidebar-tag { display: none; }
+  .content { margin-left: 0; }
+  section { padding: 32px 22px; }
+  .profile h1 { font-size: 32px; }
 }
