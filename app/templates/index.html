@@ -20,15 +20,19 @@
 </head>
 
 <body>
-    <header class="nav-bar">
-        <div class="nav-content">
+    
+    <aside class="sidebar">
+        <div class="sidebar-logo">
             <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
+                <img src="./static/img/logo.svg" />
             </a>
         </div>
-    </header>
+        <nav class="sidebar-menu">
+            {% for page in pages %}
+            <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
+            {% endfor %}
+        </nav>
+    </aside>
 
     <div class="profile">
         <div id="profile-picture" class="profile-picture">
