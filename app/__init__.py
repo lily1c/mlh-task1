@@ -7,10 +7,11 @@ app = Flask(__name__)
 pages = [
     {"name": "Home", "url": "/"},
     {"name": "Hobbies", "url": "/hobbies"},
+    {"name": "Map", "url": "/map"},
 ]
 
 about = (
-    "I study CompE major Mount Vernon Nazarene University "
+    "I'm a Computer Engineering junior at Mount Vernon Nazarene University "
     "(Mathematics minor) with a strong foundation in programming, robotics, "
     "network engineering, embedded systems, and AI. I'm a Production Engineering "
     "Fellow on the MLH x Meta track and an AI4ALL Ignite '26 fellow. I love "
@@ -64,6 +65,18 @@ hobbies = [
      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600"},
 ]
 
+visited = [
+    {"place": "Mount Vernon, Ohio, USA", "lat": 40.3934, "lng": -82.4857, "note": "Home base — MVNU"},
+    {"place": "Providence, Rhode Island, USA", "lat": 41.8240, "lng": -71.4128, "note": "Rhode Island"},
+    {"place": "Seattle, Washington, USA", "lat": 47.6062, "lng": -122.3321, "note": "Seattle"},
+    {"place": "Charlotte, North Carolina, USA", "lat": 35.2271, "lng": -80.8431, "note": "North Carolina"},
+    {"place": "Detroit, Michigan, USA", "lat": 42.3314, "lng": -83.0458, "note": "Detroit"},
+    {"place": "New York, USA", "lat": 40.7128, "lng": -74.0060, "note": "MLH × Meta Fellowship"},
+    {"place": "San Francisco, USA", "lat": 37.7749, "lng": -122.4194, "note": "AI4ALL"},
+    {"place": "Chicago, USA", "lat": 41.8781, "lng": -87.6298, "note": "GDG Summit"},
+    {"place": "Turkmenistan", "lat": 38.9697, "lng": 59.5563, "note": "Where my journey started"},
+]
+
 
 @app.route('/')
 def index():
@@ -77,3 +90,9 @@ def index():
 def hobbies_page():
     return render_template('hobbies.html', title="My Hobbies",
                            pages=pages, hobbies=hobbies)
+
+
+@app.route('/map')
+def visited_map():
+    return render_template('map.html', title="Places I've Visited",
+                           pages=pages, visited=visited)
