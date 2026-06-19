@@ -36,41 +36,9 @@
 
     <div class="profile">
         <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
+            <img src="./static/img/profile.png">
         </div>
         <h1>{{ title }}</h1>
     </div>
-
-    <section class="work-experience">
-        <h2>Work Experience</h2>
-        {% for job in work_experiences %}
-        <div class="card">
-            <h3>{{ job.title }} — {{ job.company }}</h3>
-            <p class="dates">{{ job.dates }}</p>
-            <p>{{ job.description }}</p>
-        </div>
-        {% endfor %}
-    </section>
-
-    <section class="education">
-        <h2>Education</h2>
-        {% for edu in educations %}
-        <div class="card">
-            <h3>{{ edu.degree }} — {{ edu.school }}</h3>
-            <p class="dates">{{ edu.dates }}</p>
-            <p>{{ edu.description }}</p>
-        </div>
-        {% endfor %}
-    </section>
-
-    <section class="hobbies">
-        <h2>Hobbies</h2>
-        {% for hobby in hobbies %}
-        <div class="card">
-            <h3>{{ hobby.name }}</h3>
-            <p>{{ hobby.description }}</p>
-        </div>
-        {% endfor %}
-    </section>
 </body>
 </html>
