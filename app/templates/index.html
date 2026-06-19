@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Personal Portfolio">
-    <meta property="og:description" content="My Personal Portfolio">
-    <meta property="og:url" content="{{ url }}">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
-    <title>{{ title }}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta property="og:title" content="Personal Portfolio">
+<meta property="og:description" content="My Personal Portfolio">
+<meta property="og:url" content="{{ url }}">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./static/styles/main.css">
+<link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+<title>{{ title }}</title>
 </head>
-
 <body>
-    
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <a href="/">
-                <img src="./static/img/logo.svg" />
-            </a>
-        </div>
-        <nav class="sidebar-menu">
-            {% for page in pages %}
-            <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
-            {% endfor %}
-        </nav>
-    </aside>
-
-    <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
-        </div>
-        <h1>{{ title }}</h1>
-    </div>
-
-    <section class="work-experience">
-        <h2>Work Experience</h2>
-        {% for job in work_experiences %}
-        <div class="card">
-            <h3>{{ job.title }} — {{ job.company }}</h3>
-            <p class="dates">{{ job.dates }}</p>
-            <p>{{ job.description }}</p>
-        </div>
+<aside class="sidebar">
+    <div class="sidebar-logo"><a href="/"><img src="./static/img/logo.svg" /></a></div>
+    <nav class="sidebar-menu">
+        {% for page in pages %}
+        <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
         {% endfor %}
-    </section>
+    </nav>
+    <div class="sidebar-tag">CompE · AI/ML<br>MLH × Meta Fellow</div>
+</aside>
 
-    <section class="education">
-        <h2>Education</h2>
-        {% for edu in educations %}
-        <div class="card">
-            <h3>{{ edu.degree }} — {{ edu.school }}</h3>
-            <p class="dates">{{ edu.dates }}</p>
-            <p>{{ edu.description }}</p>
-        </div>
-        {% endfor %}
-    </section>
+<div class="content">
+  <header class="profile">
+      <div class="profile-picture"><img src="./static/img/profile.png"></div>
+      <h1>{{ title }}</h1>
+      <p class="role">PE Fellow @ MLH × Meta · AI4ALL '26 · CompE @ MVNU</p>
+  </header>
 
-    <section class="hobbies">
-        <h2>Hobbies</h2>
-        {% for hobby in hobbies %}
-        <div class="card">
-            <h3>{{ hobby.name }}</h3>
-            <p>{{ hobby.description }}</p>
-        </div>
-        {% endfor %}
-    </section>
+  <section class="about">
+      <div class="section-head"><h2>About</h2><span class="rule"></span></div>
+      <p>{{ about }}</p>
+  </section>
+
+  <section class="work-experience">
+      <div class="section-head"><h2>Work Experience</h2><span class="rule"></span></div>
+      {% for job in work_experiences %}
+      <div class="card">
+          <h3>{{ job.title }} — {{ job.company }}</h3>
+          <p class="dates">{{ job.dates }}</p>
+          <p>{{ job.description }}</p>
+      </div>
+      {% endfor %}
+  </section>
+
+  <section class="education">
+      <div class="section-head"><h2>Education</h2><span class="rule"></span></div>
+      {% for edu in educations %}
+      <div class="card">
+          <h3>{{ edu.degree }} — {{ edu.school }}</h3>
+          <p class="dates">{{ edu.dates }}</p>
+          <p>{{ edu.description }}</p>
+      </div>
+      {% endfor %}
+  </section>
+
+  <section class="hobbies">
+      <div class="section-head"><h2>Hobbies</h2><span class="rule"></span></div>
+      <div class="hobbies-grid">
+          {% for hobby in hobbies %}
+          <div class="hobby-card">
+              <img src="{{ hobby.image }}" alt="{{ hobby.name }}" class="hobby-img">
+              <div class="hobby-body">
+                  <h3>{{ hobby.name }}</h3>
+                  <p>{{ hobby.description }}</p>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </section>
+
+  <footer class="foot">© {{ title }} · Built with Flask · MLH Fellowship Week 1</footer>
+</div>
 </body>
 </html>
