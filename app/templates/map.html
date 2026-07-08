@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./static/styles/main.css">
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<title>{{ title }}</title>
+</head>
+<body>
+<aside class="sidebar">
+    <div class="sidebar-logo"><a href="/"><img src="./static/img/logo.svg" /></a></div>
+    <nav class="sidebar-menu">
+        {% for page in pages %}
+        <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
+        {% endfor %}
+    </nav>
+    <div class="sidebar-tag">CompE · AI/ML<br>MLH × Meta Fellow</div>
+</aside>
+
+<div class="content">
+  <section class="map-section" style="padding-top:48px;">
+      <div class="section-head"><h2>{{ title }}</h2><span class="rule"></span></div>
+      <div id="map" style="height:520px; border-radius:12px; border:1px solid #e2e8f2;"></div>
+  </section>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const places = [
+    {% for v in visited %}
+    { place: "{{ v.place }}", lat: {{ v.lat }}, lng: {{ v.lng }}, note: "{{ v.note }}" },
+    {% endfor %}
+  ];
+
+  const map = L.map('map').setView([39.5, -98.0], 4);  // centered on US
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  places.forEach(p => {
+    L.marker([p.lat, p.lng]).addTo(map)
+      .bindPopup("<b>" + p.place + "</b><br>" + p.note);
+  });
+</script>
+</body>
+</html>
