@@ -5,6 +5,7 @@ from peewee import MySQLDatabase
 from .writing import get_articles
 from playhouse.shortcuts import model_to_dict
 from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField
+from flask import render_template
 
 import datetime 
 load_dotenv()
@@ -133,6 +134,10 @@ def writing_page():
     return render_template('writing.html', title="Writing",
                            pages=pages, articles=get_articles())
 
+@app.route('/timeline')
+def timeline_page():
+    return render_template('timeline.html')
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']
@@ -156,3 +161,4 @@ def delete_time_line_post(post_id):
     if deleted:
         return {'deleted': post_id}
     return {'error': f'post {post_id} not found'}, 404
+

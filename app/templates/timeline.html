@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline</title>
+  <!-- Blueimp MD5 — needed to hash emails for Gravatar (browsers have no native MD5) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 640px; margin: 0 auto; padding: 2rem 1rem;
+      background: #f4f5f7; color: #1a1a1a;
+    }
+    h1 { text-align: center; }
+    form {
+      background: #fff; padding: 1.5rem; border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 2rem;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    input, textarea {
+      width: 100%; padding: .6rem .75rem; border: 1px solid #ccc;
+      border-radius: 8px; font-size: 1rem; font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 90px; }
+    button {
+      background: #2563eb; color: #fff; border: none; padding: .7rem;
+      border-radius: 8px; font-size: 1rem; cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    .post {
+      background: #fff; padding: 1rem 1.25rem; border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 1rem;
+      display: flex; gap: 1rem;
+    }
+    .post img { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; }
+    .post .meta { font-weight: 600; }
+    .post .email { color: #666; font-weight: 400; font-size: .85rem; }
+    .post .date { color: #999; font-size: .8rem; margin-top: .25rem; }
+    .post .content { margin-top: .5rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Timeline</h1>
+
+  <form id="timeline-form">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="content" placeholder="What's on your mind?" required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <div id="timeline-posts"></div>
+
+  <script>
+    // Build a Gravatar URL from an email. d=identicon gives a generated
+    // avatar when the email has no Gravatar account. md5() comes from blueimp-md5.
+    function gravatar(email) {
+      const hash = md5(email.trim().toLowerCase());
+      return `https://www.gravatar.com/avatar/${hash}?d=identicon&s=96`;
+    }
+
+    function fmtDate(s) {
+      const d = new Date(s);
+      return isNaN(d) ? s : d.toLocaleString();
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    async function loadPosts() {
+      const res = await fetch('/api/timeline_post');
+      const data = await res.json();
+      const container = document.getElementById('timeline-posts');
+      container.innerHTML = '';
+      for (const p of data.timeline_posts) {
+        const el = document.createElement('div');
+        el.className = 'post';
+        el.innerHTML = `
+          <img src="${gravatar(p.email)}" alt="avatar">
+          <div>
+            <div class="meta">${escapeHtml(p.name)}
+              <span class="email">&lt;${escapeHtml(p.email)}&gt;</span></div>
+            <div class="date">${fmtDate(p.created_at)}</div>
+            <div class="content">${escapeHtml(p.content)}</div>
+          </div>`;
+        container.appendChild(el);
+      }
+    }
+
+    document.getElementById('timeline-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const body = new URLSearchParams(new FormData(form));
+      await fetch('/api/timeline_post', { method: 'POST', body });
+      form.reset();
+      loadPosts();
+    });
+
+    loadPosts();
+  </script>
+</body>
+</html>
