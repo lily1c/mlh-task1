@@ -7,72 +7,114 @@
 <meta property="og:description" content="My Personal Portfolio">
 <meta property="og:url" content="{{ url }}">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./static/styles/main.css">
-<link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.1.0/dist/tabler-icons.min.css">
+<link rel="icon" href="./static/img/favicon.ico" type="image/x-icon">
 <title>{{ title }}</title>
 </head>
 <body>
-<aside class="sidebar">
-    <div class="sidebar-logo"><a href="/"><img src="./static/img/logo.svg" /></a></div>
-    <nav class="sidebar-menu">
-        {% for page in pages %}
-        <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
-        {% endfor %}
-    </nav>
-    <div class="sidebar-tag">CompE · AI/ML<br>MLH × Meta Fellow</div>
-</aside>
+<div class="wrap">
 
-<div class="content">
-  <header class="profile">
-      <div class="profile-picture"><img src="./static/img/profile.png"></div>
-      <h1>{{ title }}</h1>
-      <p class="role">PE Fellow @ MLH × Meta · AI4ALL '26 · CompE @ MVNU</p>
+  <nav class="nav">
+    <a href="/" class="brand"><img src="./static/img/logo.svg" alt=""> ASSOL ABASOVA</a>
+    <span class="links">
+      {% for page in pages %}<a href="{{ page.url }}" class="{{ 'active' if page.url == '/' else '' }}">{{ page.name }}</a>{% endfor %}
+    </span>
+  </nav>
+
+  <header class="hero">
+    <div class="xpbar">
+      <span>XP &middot; LEVEL 03 &middot; COMPUTER ENGINEER</span>
+      <span>PLAYER 01 <span class="track"><span class="fill"></span></span></span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <div class="tourguide">hi. since you're new here,<br>let me be your tour guide.</div>
+        <h1>ASSOL<span class="sub">ABASOVA</span></h1>
+        <div class="rolebar">
+          <span class="pill">COMPUTER ENGINEER</span>
+          <span class="plain">+ AI / ML &middot; NETWORKS &middot; EMBEDDED</span>
+        </div>
+        <div class="socials">
+          <a class="gh" href="https://github.com/assolabasova" target="_blank" rel="noopener" aria-label="GitHub"><i class="ti ti-brand-github"></i></a>
+          <a class="li" href="https://linkedin.com/in/assolabasova" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+          <a class="sb" href="https://assolabasova.substack.com" target="_blank" rel="noopener" aria-label="Substack"><i class="ti ti-brand-medium"></i></a>
+          <a class="em" href="mailto:you@example.com" aria-label="Email"><i class="ti ti-mail"></i></a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="./static/img/profile.png" alt="Illustrated portrait of Assol Abasova">
+        <span class="tag">PLAYER 01</span>
+      </div>
+    </div>
   </header>
 
-  <section class="about">
-      <div class="section-head"><h2>About</h2><span class="rule"></span></div>
-      <p>{{ about }}</p>
+  <section class="section" id="about">
+    <div class="eyebrow"><span class="lvl">Level 01</span> &middot; Meet the player</div>
+    <h2 class="section-title">About</h2>
+    <p class="about-body">{{ about }}</p>
   </section>
 
-  <section class="work-experience">
-      <div class="section-head"><h2>Work Experience</h2><span class="rule"></span></div>
-      {% for job in work_experiences %}
-      <div class="card">
-          <h3>{{ job.title }} — {{ job.company }}</h3>
-          <p class="dates">{{ job.dates }}</p>
-          <p>{{ job.description }}</p>
+  <section class="section" id="work">
+    <div class="eyebrow"><span class="lvl">Level 02</span> &middot; Quest log</div>
+    <h2 class="section-title">Experience</h2>
+    {% for job in work_experiences %}
+    <div class="quest">
+      <div class="idx">{{ '%02d' % loop.index }}</div>
+      <div>
+        <div class="title">{{ job.title }} &middot; <span class="company">{{ job.company }}</span></div>
+        <div class="desc">{{ job.description }}</div>
       </div>
-      {% endfor %}
+      <div class="dates">{{ job.dates }}</div>
+    </div>
+    {% endfor %}
   </section>
 
-  <section class="education">
-      <div class="section-head"><h2>Education</h2><span class="rule"></span></div>
-      {% for edu in educations %}
-      <div class="card">
-          <h3>{{ edu.degree }} — {{ edu.school }}</h3>
-          <p class="dates">{{ edu.dates }}</p>
-          <p>{{ edu.description }}</p>
+  <section class="section" id="skills">
+    <div class="eyebrow"><span class="lvl">Level 03</span> &middot; Stats panel</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="stats">
+      <div class="stat-card">
+        <h4>Languages &amp; ML</h4>
+        <div class="stat-row"><div class="lab"><span>Python</span><span>expert</span></div><div class="bar"><i style="width:92%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>PyTorch / CNNs</span><span>advanced</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>XGBoost / regression</span><span>advanced</span></div><div class="bar"><i style="width:82%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>C / embedded</span><span>proficient</span></div><div class="bar"><i style="width:70%"></i></div></div>
       </div>
-      {% endfor %}
-  </section>
-
-  <section class="hobbies">
-      <div class="section-head"><h2>Hobbies</h2><span class="rule"></span></div>
-      <div class="hobbies-grid">
-          {% for hobby in hobbies %}
-          <div class="hobby-card">
-              <img src="{{ hobby.image }}" alt="{{ hobby.name }}" class="hobby-img">
-              <div class="hobby-body">
-                  <h3>{{ hobby.name }}</h3>
-                  <p>{{ hobby.description }}</p>
-              </div>
-          </div>
-          {% endfor %}
+      <div class="stat-card">
+        <h4>Networks &amp; infra</h4>
+        <div class="stat-row"><div class="lab"><span>Linux / SRE</span><span>advanced</span></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Networking / Meraki</span><span>advanced</span></div><div class="bar"><i style="width:78%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Automation / CI</span><span>proficient</span></div><div class="bar"><i style="width:72%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Flask / web</span><span>proficient</span></div><div class="bar"><i style="width:68%"></i></div></div>
       </div>
+      <div class="stat-card">
+        <h4>Tools &amp; practice</h4>
+        <div class="stat-row"><div class="lab"><span>Git / GitHub</span><span>advanced</span></div><div class="bar"><i style="width:84%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Jira / tickets</span><span>proficient</span></div><div class="bar"><i style="width:75%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Transfer learning</span><span>advanced</span></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div class="stat-row"><div class="lab"><span>Robotics</span><span>proficient</span></div><div class="bar"><i style="width:66%"></i></div></div>
+      </div>
+    </div>
   </section>
 
-  <footer class="foot">© {{ title }} · Built with Flask · MLH Fellowship Week 1</footer>
+  <section class="section" id="education">
+    <div class="eyebrow"><span class="lvl">Level 03.5</span> &middot; Training log</div>
+    <h2 class="section-title">Education</h2>
+    {% for edu in educations %}
+    <div class="edu">
+      <div class="school">{{ edu.school }}</div>
+      <div class="dates">{{ edu.dates }}</div>
+      <div class="degree">{{ edu.degree }}</div>
+      <div class="desc">{{ edu.description }}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <footer class="foot">
+    <span>&copy; 2026 Assol Abasova &middot; built with Flask</span>
+    <span>Mount Vernon, OH &middot; seeking research + internships</span>
+  </footer>
 </div>
 </body>
 </html>

@@ -3,36 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./static/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.1.0/dist/tabler-icons.min.css">
+<link rel="icon" href="./static/img/favicon.ico" type="image/x-icon">
 <title>{{ title }}</title>
 </head>
 <body>
-<aside class="sidebar">
-    <div class="sidebar-logo"><a href="/"><img src="./static/img/logo.svg" /></a></div>
-    <nav class="sidebar-menu">
-        {% for page in pages %}
-        <a href="{{ page.url }}" class="menu-button">{{ page.name }}</a>
-        {% endfor %}
-    </nav>
-    <div class="sidebar-tag">CompE · AI/ML<br>MLH × Meta Fellow</div>
-</aside>
-
-<div class="content">
-  <section class="hobbies" style="padding-top:48px;">
-      <div class="section-head"><h2>{{ title }}</h2><span class="rule"></span></div>
-      <div class="hobbies-grid">
-          {% for hobby in hobbies %}
-          <div class="hobby-card">
-              <img src="{{ hobby.image }}" alt="{{ hobby.name }}" class="hobby-img">
-              <div class="hobby-body">
-                  <h3>{{ hobby.name }}</h3>
-                  <p>{{ hobby.description }}</p>
-              </div>
-          </div>
-          {% endfor %}
+<div class="wrap">
+  <nav class="nav">
+    <a href="/" class="brand"><img src="./static/img/logo.svg" alt=""> ASSOL ABASOVA</a>
+    <span class="links">
+      {% for page in pages %}<a href="{{ page.url }}" class="{{ 'active' if page.url == '/hobbies' else '' }}">{{ page.name }}</a>{% endfor %}
+    </span>
+  </nav>
+  <header style="padding-top:2.75rem;">
+    <div class="eyebrow"><span class="lvl">Level 05</span> &middot; Side quests</div>
+    <h1 class="section-title" style="font-size:clamp(40px,8vw,64px); color:var(--pink); margin-bottom:.6rem;">Hobbies</h1>
+    <p class="about-body" style="color:var(--muted);">What I do when I'm not shipping &mdash; the stuff that keeps me balanced.</p>
+  </header>
+  <div class="grid" style="margin-top:2.5rem;">
+    {% for hobby in hobbies %}
+    <div class="card">
+      {% if hobby.image %}<div class="thumb"><img src="{{ hobby.image }}" alt="{{ hobby.name }}" loading="lazy"></div>
+      {% else %}<div class="thumb empty">{{ hobby.name|upper }}</div>{% endif %}
+      <div class="card-body">
+        <h3>{{ hobby.name }}</h3>
+        <p>{{ hobby.description }}</p>
       </div>
-  </section>
+    </div>
+    {% endfor %}
+  </div>
+  <footer class="foot">
+    <span>&copy; 2026 Assol Abasova &middot; built with Flask</span>
+    <span>Mount Vernon, OH &middot; seeking research + internships</span>
+  </footer>
 </div>
 </body>
 </html>

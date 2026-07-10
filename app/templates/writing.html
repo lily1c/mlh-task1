@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="./static/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.1.0/dist/tabler-icons.min.css">
+<link rel="icon" href="./static/img/favicon.ico" type="image/x-icon">
+<title>{{ title }}</title>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a href="/" class="brand"><img src="./static/img/logo.svg" alt=""> ASSOL ABASOVA</a>
+    <span class="links">
+      {% for page in pages %}<a href="{{ page.url }}" class="{{ 'active' if page.url == '/writing' else '' }}">{{ page.name }}</a>{% endfor %}
+    </span>
+  </nav>
+  <header style="padding-top:2.75rem;">
+    <div class="eyebrow"><span class="lvl">Level 04</span> &middot; Field notes</div>
+    <h1 class="section-title" style="font-size:clamp(40px,8vw,64px); color:var(--pink); margin-bottom:.6rem;">Writing</h1>
+    <p class="about-body" style="color:var(--muted);">Essays and notes on AI/ML, networks, and building things &mdash; pulled live from Substack and Medium.</p>
+  </header>
+  {% if articles %}
+  <div class="grid" style="margin-top:2.5rem;">
+    {% for a in articles %}
+    <a class="card" href="{{ a.url }}" target="_blank" rel="noopener">
+      {% if a.image %}<div class="thumb"><img src="{{ a.image }}" alt="" loading="lazy"></div>
+      {% else %}<div class="thumb empty">{{ a.source|upper }}</div>{% endif %}
+      <div class="card-body">
+        <span class="badge">{{ a.source }}</span>
+        <h3>{{ a.title }}</h3>
+        <p>{{ a.preview }}</p>
+        <div class="meta"><span>{{ a.date_display }}</span><span class="read">Read &rarr;</span></div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><p>No articles loaded yet. Once your feeds are set in <code>writing.py</code>, your latest Substack and Medium posts appear here automatically.</p></div>
+  {% endif %}
+  <footer class="foot">
+    <span>&copy; 2026 Assol Abasova &middot; built with Flask</span>
+    <span>Mount Vernon, OH &middot; seeking research + internships</span>
+  </footer>
+</div>
+</body>
+</html>
+
+CREATE USER 'myportfolio'@'localhost' IDENTIFIED BY 'mypassword';
