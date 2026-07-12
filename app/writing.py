@@ -6,7 +6,7 @@ Usage in app.py:
     from writing import get_articles
     articles = get_articles()   # list of dicts, newest first
 """
-
+from __future__ import annotations
 import re
 import time
 import html
