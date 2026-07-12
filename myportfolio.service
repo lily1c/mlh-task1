@@ -6,8 +6,7 @@ After=network.target
 User=root
 Group=root
 WorkingDirectory=/root/mlh-task1
-Environment="PATH=/root/python3-virtualenv/bin"
-ExecStart=/root/python3-virtualenv/bin/flask run --host=0.0.0.0
-
+Environment="PATH=/root/mlh-task1/python3-virtualenv/bin"
+ExecStart=/root/mlh-task1/python3-virtualenv/bin/flask run --host=0.0.0.0
 [Install]
 WantedBy=multi-user.target
