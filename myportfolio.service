@@ -1,0 +1,13 @@
+[Unit]
+Description=myportfolio
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/mlh-task1
+Environment="PATH=/root/python3-virtualenv/bin"
+ExecStart=/root/python3-virtualenv/bin/flask run --host=0.0.0.0
+
+[Install]
+WantedBy=multi-user.target
