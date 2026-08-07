@@ -90,7 +90,7 @@ educations = [
 ]
 
 hobbies = [
-    {"name": "Photography",
+    {"name": "Photography + Instagram",
      "description": "Capturing moments and experimenting with composition and light.",
      "image": "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=600"},
     {"name": "Running",
