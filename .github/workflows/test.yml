@@ -26,5 +26,5 @@ jobs:
 
       - name: Run tests
         run: |
-          source venv/bin/activate
+          source python3-virtualenv/bin/activate
           bash run_test.sh
